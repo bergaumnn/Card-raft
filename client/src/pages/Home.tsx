@@ -145,6 +145,12 @@ export default function Home() {
                       color={secondaryColor}
                       onChange={setSecondaryColor}
                       label={t("colors.secondary")}
+                      disabled={selectedTemplate === "minimal"} // 🔹 блокуємо
+                      style={
+                        selectedTemplate === "minimal"
+                          ? { opacity: 0.5, cursor: "not-allowed" } // 🔹 робимо сірим
+                          : {}
+                      }
                     />
                   </div>
                 </TabsContent>
