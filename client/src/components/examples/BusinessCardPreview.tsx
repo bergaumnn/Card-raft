@@ -18,6 +18,7 @@ export default function BusinessCardPreviewExample() {
         template="creative"
         primaryColor="#8b5cf6"
         secondaryColor="#ec4899"
+        textColor="#000000" 
         scale={0.8}
       />
     </div>

@@ -1,35 +1,55 @@
-import { HexColorPicker } from "react-colorful";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 interface ColorPickerProps {
-  color: string;
-  onChange: (color: string) => void;
-  label: string;
+  color: string; // Поточне значення кольору
+  onChange: (color: string) => void; // Функція, що викликається при зміні кольору
+  label?: string; // Текст мітки над елементом
+  disabled?: boolean; // Якщо true — вибір кольору заблоковано
 }
 
-export function ColorPicker({ color, onChange, label }: ColorPickerProps) {
+// Компонент для вибору кольору
+export function ColorPicker({ color, onChange, label, disabled = false }: ColorPickerProps) {
   return (
-    <div className="space-y-2">
-      <label className="text-sm font-medium">{label}</label>
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button
-            variant="outline"
-            className="w-full justify-start space-x-2"
-            data-testid={`color-picker-${label.toLowerCase()}`}
-          >
-            <div
-              className="w-6 h-6 rounded-sm border border-border"
-              style={{ backgroundColor: color }}
-            />
-            <span className="text-sm font-mono">{color.toUpperCase()}</span>
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-3" align="start">
-          <HexColorPicker color={color} onChange={onChange} />
-        </PopoverContent>
-      </Popover>
+    <div className="flex flex-col gap-2">
+
+      {/* Підпис над елементом (Label) */}
+      {label && (
+        <Label className={disabled ? "text-gray-400" : ""}>
+          {label}
+        </Label>
+      )}
+
+      <div className="flex items-center gap-2">
+
+        {/* Квадратик вибору кольору */}
+        <input
+          type="color" // HTML елемент вибору кольору
+          value={color} // Поточний колір
+          onChange={(e) => !disabled && onChange(e.target.value)} // Обробник зміни
+          className={`w-10 h-10 rounded-md border-0 p-0 appearance-none ${
+            disabled ? "bg-gray-300 cursor-not-allowed" : "cursor-pointer"
+          }`} // Зовнішній вигляд кнопки
+          style={{ backgroundColor: disabled ? "#d1d5db" : color }} // Якщо заблоковано — фон сірий
+          disabled={disabled} // Блокує взаємодію
+        />
+
+        {/* Поле для ручного введення HEX-коду кольору */}
+        <Input
+          type="text"
+          value={color}
+          onChange={(e) => {
+            const value = e.target.value;
+            // Перевірка, чи введений текст — допустимий HEX-код
+            if (/^#([0-9A-Fa-f]{0,6})$/.test(value) || value === "") {
+              !disabled && onChange(value); // Якщо не заблоковано — оновлюємо колір
+            }
+          }}
+          placeholder="#rrggbb"
+          className="font-mono" // Моноширинний шрифт для HEX-кодів
+          disabled={disabled} // Поле неактивне, якщо заблоковано
+        />
+      </div>
     </div>
   );
 }

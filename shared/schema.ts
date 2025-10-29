@@ -17,7 +17,6 @@ export const insertUserSchema = createInsertSchema(users).pick({
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
-// Business card data types
 export type Template = "classic" | "creative" | "minimal" | "professional";
 
 export interface BusinessCardData {
@@ -32,11 +31,11 @@ export interface BusinessCardData {
 }
 
 export const businessCardSchema = z.object({
-  firstName: z.string().min(1, "Ім'я обов'язкове"),
-  lastName: z.string().min(1, "Прізвище обов'язкове"),
-  profession: z.string().min(1, "Професія обов'язкова"),
+  firstName: z.string().min(1, "validation.firstNameRequired"),
+  lastName: z.string().min(1, "validation.lastNameRequired"),
+  profession: z.string().min(1, "validation.professionRequired"),
   phone: z.string().optional().default(""),
-  email: z.string().email("Невірний формат email").or(z.literal("")),
+  email: z.string().email("validation.invalidEmail").or(z.literal("")),
   website: z.string().optional().default(""),
   address: z.string().optional().default(""),
 });

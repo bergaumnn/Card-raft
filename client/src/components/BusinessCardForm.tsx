@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
 import { businessCardSchema, InsertBusinessCard } from "@shared/schema";
 import {
   Form,
@@ -19,6 +20,7 @@ interface BusinessCardFormProps {
 }
 
 export function BusinessCardForm({ onDataChange, initialData }: BusinessCardFormProps) {
+  const { t } = useTranslation();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<InsertBusinessCard & { avatar?: string }>({
@@ -64,11 +66,11 @@ export function BusinessCardForm({ onDataChange, initialData }: BusinessCardForm
             name="firstName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Ім'я</FormLabel>
+                <FormLabel>{t("form.firstName")}</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="Іван"
+                    placeholder={t("form.placeholders.firstName")}
                     data-testid="input-firstName"
                     onChange={(e) => {
                       field.onChange(e);
@@ -86,11 +88,11 @@ export function BusinessCardForm({ onDataChange, initialData }: BusinessCardForm
             name="lastName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Прізвище</FormLabel>
+                <FormLabel>{t("form.lastName")}</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="Петренко"
+                    placeholder={t("form.placeholders.lastName")}
                     data-testid="input-lastName"
                     onChange={(e) => {
                       field.onChange(e);
@@ -109,11 +111,11 @@ export function BusinessCardForm({ onDataChange, initialData }: BusinessCardForm
           name="profession"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Професія</FormLabel>
+              <FormLabel>{t("form.profession")}</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="Веб-розробник"
+                  placeholder={t("form.placeholders.profession")}
                   data-testid="input-profession"
                   onChange={(e) => {
                     field.onChange(e);
@@ -131,11 +133,11 @@ export function BusinessCardForm({ onDataChange, initialData }: BusinessCardForm
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Телефон (необов'язково)</FormLabel>
+              <FormLabel>{t("form.phone")}</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="+380 XX XXX XX XX"
+                  placeholder={t("form.placeholders.phone")}
                   data-testid="input-phone"
                   onChange={(e) => {
                     field.onChange(e);
@@ -153,12 +155,12 @@ export function BusinessCardForm({ onDataChange, initialData }: BusinessCardForm
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email (необов'язково)</FormLabel>
+              <FormLabel>{t("form.email")}</FormLabel>
               <FormControl>
                 <Input
                   {...field}
                   type="email"
-                  placeholder="example@email.com"
+                  placeholder={t("form.placeholders.email")}
                   data-testid="input-email"
                   onChange={(e) => {
                     field.onChange(e);
@@ -176,11 +178,11 @@ export function BusinessCardForm({ onDataChange, initialData }: BusinessCardForm
           name="website"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Веб-сайт (необов'язково)</FormLabel>
+              <FormLabel>{t("form.website")}</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="www.example.com"
+                  placeholder={t("form.placeholders.website")}
                   data-testid="input-website"
                   onChange={(e) => {
                     field.onChange(e);
@@ -198,11 +200,11 @@ export function BusinessCardForm({ onDataChange, initialData }: BusinessCardForm
           name="address"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Адреса (необов'язково)</FormLabel>
+              <FormLabel>{t("form.address")}</FormLabel>
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="м. Київ, Україна"
+                  placeholder={t("form.placeholders.address")}
                   data-testid="input-address"
                   onChange={(e) => {
                     field.onChange(e);
@@ -216,7 +218,7 @@ export function BusinessCardForm({ onDataChange, initialData }: BusinessCardForm
         />
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Зображення (необов'язково)</label>
+          <label className="text-sm font-medium">{t("form.image")}</label>
           <div
             className="border-2 border-dashed rounded-md p-6 text-center cursor-pointer hover-elevate transition-all"
             onClick={() => fileInputRef.current?.click()}
@@ -229,13 +231,13 @@ export function BusinessCardForm({ onDataChange, initialData }: BusinessCardForm
                   alt="Preview"
                   className="w-24 h-24 mx-auto rounded-md object-cover"
                 />
-                <p className="text-sm text-muted-foreground">Натисніть, щоб змінити</p>
+                <p className="text-sm text-muted-foreground">{t("form.upload.change")}</p>
               </div>
             ) : (
               <div className="space-y-2">
                 <Upload className="w-8 h-8 mx-auto text-muted-foreground" />
                 <p className="text-sm text-muted-foreground">
-                  Натисніть, щоб завантажити зображення
+                  {t("form.upload.click")}
                 </p>
               </div>
             )}

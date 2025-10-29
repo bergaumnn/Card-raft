@@ -1,0 +1,14 @@
+{
+  "title": "Business Card Generator",
+  "createCard": "Create your card",
+  "export": "Export",
+  "save": "Save",
+  "download": "Download",
+  "name": "Name",
+  "position": "Position",
+  "contacts": "Contacts",
+  "design": "Design",
+  "chooseTemplate": "Choose a template",
+  "back": "Back",
+  "next": "Next"
+}

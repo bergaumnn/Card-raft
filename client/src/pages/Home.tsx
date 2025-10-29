@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { BusinessCardData, Template } from "@shared/schema";
 import { BusinessCardPreview } from "@/components/BusinessCardPreview";
 import { BusinessCardForm } from "@/components/BusinessCardForm";
 import { TemplateSelector } from "@/components/TemplateSelector";
 import { ColorPicker } from "@/components/ColorPicker";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -20,6 +22,7 @@ const templateColors: Record<Template, { primary: string; secondary: string }> =
 };
 
 export default function Home() {
+  const { t } = useTranslation();
   const { toast } = useToast();
   const [cardData, setCardData] = useState<BusinessCardData>({
     firstName: "",
@@ -64,18 +67,18 @@ export default function Home() {
       });
 
       const link = document.createElement("a");
-      link.download = `vizytka-${cardData.firstName}-${cardData.lastName}.png`;
+      link.download = `business-card-${cardData.firstName}-${cardData.lastName}.png`;
       link.href = canvas.toDataURL();
       link.click();
 
       toast({
-        title: "Успішно завантажено!",
-        description: "Ваша візитка збережена як PNG файл.",
+        title: t("toast.success.title"),
+        description: t("toast.success.description"),
       });
     } catch (error) {
       toast({
-        title: "Помилка",
-        description: "Не вдалося завантажити візитку. Спробуйте ще раз.",
+        title: t("toast.error.title"),
+        description: t("toast.error.description"),
         variant: "destructive",
       });
     }
@@ -85,35 +88,33 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold font-heading">Генератор Візиток</h1>
-            <p className="text-sm text-muted-foreground">
-              Створіть професійну візитку за лічені хвилини
-            </p>
+            <h1 className="text-2xl font-bold font-heading">{t("header.title")}</h1>
+            <p className="text-sm text-muted-foreground">{t("header.subtitle")}</p>
           </div>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
-      {/* Main content */}
       <div className="container mx-auto px-6 py-8">
         <div className="grid lg:grid-cols-[400px_1fr] gap-8">
-          {/* Left panel - Form */}
           <div className="space-y-6">
             <Card className="p-6">
               <Tabs defaultValue="data" className="w-full">
                 <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="data" data-testid="tab-data">
-                    Дані
+                    {t("tabs.data")}
                   </TabsTrigger>
                   <TabsTrigger value="style" data-testid="tab-style">
-                    Стиль
+                    {t("tabs.style")}
                   </TabsTrigger>
                   <TabsTrigger value="export" data-testid="tab-export">
-                    Експорт
+                    {t("tabs.export")}
                   </TabsTrigger>
                 </TabsList>
 
@@ -126,7 +127,7 @@ export default function Home() {
 
                 <TabsContent value="style" className="mt-6 space-y-6">
                   <div>
-                    <h3 className="font-semibold mb-4">Шаблон дизайну</h3>
+                    <h3 className="font-semibold mb-4">{t("templates.title")}</h3>
                     <TemplateSelector
                       selectedTemplate={selectedTemplate}
                       onSelectTemplate={handleTemplateChange}
@@ -134,31 +135,31 @@ export default function Home() {
                   </div>
 
                   <div className="space-y-4">
-                    <h3 className="font-semibold">Кольорова схема</h3>
+                    <h3 className="font-semibold">{t("colors.title")}</h3>
                     <ColorPicker
                       color={primaryColor}
                       onChange={setPrimaryColor}
-                      label="Основний колір"
+                      label={t("colors.primary")}
                     />
                     <ColorPicker
                       color={secondaryColor}
                       onChange={setSecondaryColor}
-                      label="Фоновий колір"
+                      label={t("colors.secondary")}
                     />
                   </div>
                 </TabsContent>
 
                 <TabsContent value="export" className="mt-6 space-y-6">
                   <div>
-                    <h3 className="font-semibold mb-2">Попередній перегляд</h3>
+                    <h3 className="font-semibold mb-2">{t("export.title")}</h3>
                     <p className="text-sm text-muted-foreground mb-4">
-                      Переконайтеся, що всі дані заповнені правильно перед завантаженням.
+                      {t("export.description")}
                     </p>
                   </div>
 
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium">Масштаб перегляду</span>
+                      <span className="text-sm font-medium">{t("export.zoom")}</span>
                       <div className="flex gap-2">
                         <Button
                           size="icon"
@@ -187,12 +188,12 @@ export default function Home() {
                       data-testid="button-download"
                     >
                       <Download className="w-4 h-4 mr-2" />
-                      Завантажити візитку
+                      {t("export.download")}
                     </Button>
 
                     {!canDownload && (
                       <p className="text-xs text-muted-foreground text-center">
-                        Заповніть обов'язкові поля: ім'я, прізвище та професію
+                        {t("export.required")}
                       </p>
                     )}
                   </div>
@@ -201,12 +202,10 @@ export default function Home() {
             </Card>
           </div>
 
-          {/* Right panel - Preview */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             <Card className="p-8 bg-muted/30">
               <div className="flex items-center justify-center min-h-[500px]">
                 <div className="relative">
-                  {/* Grid background for reference */}
                   <div
                     className="absolute inset-0 opacity-10 pointer-events-none"
                     style={{

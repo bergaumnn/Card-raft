@@ -1,0 +1,81 @@
+{
+  "header": {
+    "title": "Business Card Generator",
+    "subtitle": "Create a professional business card in minutes"
+  },
+  "tabs": {
+    "data": "Data",
+    "style": "Style",
+    "export": "Export"
+  },
+  "form": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "profession": "Profession",
+    "phone": "Phone (optional)",
+    "email": "Email (optional)",
+    "website": "Website (optional)",
+    "address": "Address (optional)",
+    "image": "Image (optional)",
+    "placeholders": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "profession": "Web Developer",
+      "phone": "+1 XXX XXX XXXX",
+      "email": "example@email.com",
+      "website": "www.example.com",
+      "address": "New York, USA"
+    },
+    "upload": {
+      "click": "Click to upload image",
+      "change": "Click to change"
+    }
+  },
+  "templates": {
+    "title": "Design Template",
+    "classic": {
+      "name": "Classic",
+      "description": "Elegant serif design with golden accent"
+    },
+    "creative": {
+      "name": "Creative",
+      "description": "Vibrant design with gradients and circles"
+    },
+    "minimal": {
+      "name": "Minimalist",
+      "description": "Clean white space with thin lines"
+    },
+    "professional": {
+      "name": "Professional",
+      "description": "Two-color structured layout"
+    }
+  },
+  "colors": {
+    "title": "Color Scheme",
+    "primary": "Primary Color",
+    "secondary": "Background Color"
+  },
+  "export": {
+    "title": "Preview",
+    "description": "Make sure all data is filled correctly before downloading.",
+    "zoom": "Preview Scale",
+    "download": "Download Business Card",
+    "required": "Fill in required fields: first name, last name and profession"
+  },
+  "toast": {
+    "success": {
+      "title": "Successfully downloaded!",
+      "description": "Your business card has been saved as PNG file."
+    },
+    "error": {
+      "title": "Error",
+      "description": "Failed to download business card. Please try again."
+    }
+  },
+  "validation": {
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "professionRequired": "Profession is required",
+    "invalidEmail": "Invalid email format"
+  }
+}

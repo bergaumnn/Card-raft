@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Template } from "@shared/schema";
 import { Card } from "@/components/ui/card";
 
@@ -6,49 +7,34 @@ interface TemplateSelectorProps {
   onSelectTemplate: (template: Template) => void;
 }
 
-const templates: { id: Template; name: string; description: string }[] = [
-  {
-    id: "classic",
-    name: "Класичний",
-    description: "Елегантний серифний дизайн з золотим акцентом",
-  },
-  {
-    id: "creative",
-    name: "Креативний",
-    description: "Яскравий дизайн з градієнтами та колами",
-  },
-  {
-    id: "minimal",
-    name: "Мінімалістичний",
-    description: "Чистий білий простір з тонкими лініями",
-  },
-  {
-    id: "professional",
-    name: "Професійний",
-    description: "Двоколірна структурована компоновка",
-  },
-];
+const templates: Template[] = ["classic", "creative", "minimal", "professional"];
 
 export function TemplateSelector({
   selectedTemplate,
   onSelectTemplate,
 }: TemplateSelectorProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="grid grid-cols-2 gap-4">
       {templates.map((template) => (
         <Card
-          key={template.id}
+          key={template}
           className={`p-4 cursor-pointer transition-all hover-elevate ${
-            selectedTemplate === template.id
+            selectedTemplate === template
               ? "border-primary border-2"
               : "border-border"
           }`}
-          onClick={() => onSelectTemplate(template.id)}
-          data-testid={`template-${template.id}`}
+          onClick={() => onSelectTemplate(template)}
+          data-testid={`template-${template}`}
         >
           <div className="space-y-2">
-            <h3 className="font-semibold text-base">{template.name}</h3>
-            <p className="text-sm text-muted-foreground">{template.description}</p>
+            <h3 className="font-semibold text-base">
+              {t(`templates.${template}.name`)}
+            </h3>
+            <p className="text-sm text-muted-foreground">
+              {t(`templates.${template}.description`)}
+            </p>
           </div>
         </Card>
       ))}
