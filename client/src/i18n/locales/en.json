@@ -53,7 +53,8 @@
   "colors": {
     "title": "Color Scheme",
     "primary": "Primary Color",
-    "secondary": "Background Color"
+    "secondary": "Background Color",
+    "text": "Text Color"
   },
   "export": {
     "title": "Preview",

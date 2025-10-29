@@ -31,16 +31,13 @@ const countryCodes: CountryCode[] = [
   { code: "+39", country: "IT", flag: "🇮🇹", maxDigits: 10 },
   { code: "+34", country: "ES", flag: "🇪🇸", maxDigits: 9 },
   { code: "+48", country: "PL", flag: "🇵🇱", maxDigits: 9 },
-  { code: "+7", country: "RU", flag: "🇷🇺", maxDigits: 10 },
 ];
 
 export function PhoneInput({ value, onChange, placeholder }: PhoneInputProps) {
   const { i18n } = useTranslation();
-  
-  // Визначаємо код країни за замовчуванням
+
   const defaultCountry = i18n.language === "uk" ? "+380" : "+1";
-  
-  // Розбиваємо value на код країни та номер
+
   const getCountryCodeFromValue = (val: string): string => {
     const matched = countryCodes.find((c) => val.startsWith(c.code));
     return matched ? matched.code : defaultCountry;
@@ -79,12 +76,12 @@ export function PhoneInput({ value, onChange, placeholder }: PhoneInputProps) {
             </span>
           </SelectValue>
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-white dark:bg-gray-800 text-black dark:text-white rounded-md shadow-lg">
           {countryCodes.map((country) => (
-            <SelectItem key={country.code} value={country.code}>
-              <span className="flex items-center gap-2">
-                {country.flag} {country.code} ({country.country})
-              </span>
+            <SelectItem key={country.code} value={country.code} className="flex items-center gap-2">
+              <span>{country.flag}</span>
+              <span>{country.code}</span>
+              <span className="text-gray-500 dark:text-gray-400">({country.country})</span>
             </SelectItem>
           ))}
         </SelectContent>

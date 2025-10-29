@@ -5,9 +5,15 @@ interface ProfessionalTemplateProps {
   data: BusinessCardData;
   primaryColor: string;
   secondaryColor: string;
+  textColor?: string;
 }
 
-export function ProfessionalTemplate({ data, primaryColor, secondaryColor }: ProfessionalTemplateProps) {
+export function ProfessionalTemplate({
+  data,
+  primaryColor,
+  secondaryColor,
+  textColor = "#000000",
+}: ProfessionalTemplateProps) {
   return (
     <div className="w-[800px] h-[450px] rounded-md overflow-hidden shadow-lg relative bg-white">
       <div
@@ -46,7 +52,9 @@ export function ProfessionalTemplate({ data, primaryColor, secondaryColor }: Pro
               >
                 <Phone className="w-5 h-5" style={{ color: primaryColor }} />
               </div>
-              <span className="text-base text-gray-700 leading-tight pt-2">{data.phone}</span>
+              <span className="text-base leading-tight pt-2" style={{ color: textColor }}>
+                {data.phone}
+              </span>
             </div>
           )}
           {data.email && (
@@ -57,7 +65,9 @@ export function ProfessionalTemplate({ data, primaryColor, secondaryColor }: Pro
               >
                 <Mail className="w-5 h-5" style={{ color: primaryColor }} />
               </div>
-              <span className="text-base text-gray-700 break-all leading-tight pt-2">{data.email}</span>
+              <span className="text-base break-all leading-tight pt-2" style={{ color: textColor }}>
+                {data.email}
+              </span>
             </div>
           )}
           {data.website && (
@@ -68,7 +78,9 @@ export function ProfessionalTemplate({ data, primaryColor, secondaryColor }: Pro
               >
                 <Globe className="w-5 h-5" style={{ color: primaryColor }} />
               </div>
-              <span className="text-base text-gray-700 leading-tight pt-2">{data.website}</span>
+              <span className="text-base leading-tight pt-2" style={{ color: textColor }}>
+                {data.website}
+              </span>
             </div>
           )}
           {data.address && (
@@ -79,7 +91,9 @@ export function ProfessionalTemplate({ data, primaryColor, secondaryColor }: Pro
               >
                 <MapPin className="w-5 h-5" style={{ color: primaryColor }} />
               </div>
-              <span className="text-base text-gray-700 leading-tight pt-2">{data.address}</span>
+              <span className="text-base leading-tight pt-2" style={{ color: textColor }}>
+                {data.address}
+              </span>
             </div>
           )}
         </div>

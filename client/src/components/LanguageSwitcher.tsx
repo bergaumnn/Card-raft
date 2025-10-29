@@ -23,20 +23,20 @@ export function LanguageSwitcher() {
           <Languages className="h-5 w-5" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent className="bg-white text-black dark:bg-gray-800 dark:text-white rounded-md shadow-lg">
         <DropdownMenuItem
           onClick={() => changeLanguage("uk")}
-          className={i18n.language === "uk" ? "bg-accent" : ""}
+          className={`flex items-center gap-2 ${i18n.language === "uk" ? "bg-accent dark:bg-accent-dark" : ""}`}
           data-testid="language-uk"
         >
-          🇺🇦 Українська
+          Українська
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => changeLanguage("en")}
-          className={i18n.language === "en" ? "bg-accent" : ""}
+          className={`flex items-center gap-2 ${i18n.language === "en" ? "bg-accent dark:bg-accent-dark" : ""}`}
           data-testid="language-en"
         >
-          🇬🇧 English
+         English
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

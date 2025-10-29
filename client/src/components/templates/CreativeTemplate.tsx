@@ -5,9 +5,15 @@ interface CreativeTemplateProps {
   data: BusinessCardData;
   primaryColor: string;
   secondaryColor: string;
+  textColor?: string;
 }
 
-export function CreativeTemplate({ data, primaryColor, secondaryColor }: CreativeTemplateProps) {
+export function CreativeTemplate({
+  data,
+  primaryColor,
+  secondaryColor,
+  textColor = "#000000",
+}: CreativeTemplateProps) {
   return (
     <div className="w-[800px] h-[450px] rounded-md overflow-hidden shadow-lg relative bg-white">
       <div
@@ -16,7 +22,7 @@ export function CreativeTemplate({ data, primaryColor, secondaryColor }: Creativ
           background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
         }}
       />
-      
+
       <div
         className="absolute -top-20 -right-20 w-60 h-60 rounded-full opacity-10"
         style={{ backgroundColor: primaryColor }}
@@ -52,7 +58,7 @@ export function CreativeTemplate({ data, primaryColor, secondaryColor }: Creativ
                 className="h-1 w-24 mt-2 mb-3 rounded-full"
                 style={{ backgroundColor: secondaryColor }}
               />
-              <p className="text-2xl font-medium" style={{ color: primaryColor, opacity: 0.8 }}>
+              <p className="text-2xl font-medium" style={{ color: textColor }}>
                 {data.profession}
               </p>
             </div>
@@ -61,25 +67,33 @@ export function CreativeTemplate({ data, primaryColor, secondaryColor }: Creativ
               {data.phone && (
                 <div className="flex items-start gap-2">
                   <Phone className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: primaryColor }} />
-                  <span className="text-sm text-gray-700 leading-tight">{data.phone}</span>
+                  <span className="text-sm font-medium leading-tight" style={{ color: textColor }}>
+                    {data.phone}
+                  </span>
                 </div>
               )}
               {data.email && (
                 <div className="flex items-start gap-2">
                   <Mail className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: primaryColor }} />
-                  <span className="text-sm text-gray-700 leading-tight">{data.email}</span>
+                  <span className="text-sm font-medium leading-tight" style={{ color: textColor }}>
+                    {data.email}
+                  </span>
                 </div>
               )}
               {data.website && (
                 <div className="flex items-start gap-2">
                   <Globe className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: primaryColor }} />
-                  <span className="text-sm text-gray-700 leading-tight">{data.website}</span>
+                  <span className="text-sm font-medium leading-tight" style={{ color: textColor }}>
+                    {data.website}
+                  </span>
                 </div>
               )}
               {data.address && (
                 <div className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: primaryColor }} />
-                  <span className="text-sm text-gray-700 leading-tight">{data.address}</span>
+                  <span className="text-sm font-medium leading-tight" style={{ color: textColor }}>
+                    {data.address}
+                  </span>
                 </div>
               )}
             </div>

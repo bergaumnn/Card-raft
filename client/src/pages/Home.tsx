@@ -36,6 +36,7 @@ export default function Home() {
   const [selectedTemplate, setSelectedTemplate] = useState<Template>("classic");
   const [primaryColor, setPrimaryColor] = useState(templateColors.classic.primary);
   const [secondaryColor, setSecondaryColor] = useState(templateColors.classic.secondary);
+  const [textColor, setTextColor] = useState("#000000");
   const [scale, setScale] = useState(0.65);
 
   useEffect(() => {
@@ -145,12 +146,17 @@ export default function Home() {
                       color={secondaryColor}
                       onChange={setSecondaryColor}
                       label={t("colors.secondary")}
-                      disabled={selectedTemplate === "minimal"} // 🔹 блокуємо
+                      disabled={selectedTemplate === "minimal"} 
                       style={
                         selectedTemplate === "minimal"
-                          ? { opacity: 0.5, cursor: "not-allowed" } // 🔹 робимо сірим
+                          ? { opacity: 0.5, cursor: "not-allowed" } 
                           : {}
                       }
+                    />
+                    <ColorPicker
+                      color={textColor}
+                      onChange={setTextColor}
+                      label={t("colors.text")} 
                     />
                   </div>
                 </TabsContent>
@@ -225,6 +231,7 @@ export default function Home() {
                     template={selectedTemplate}
                     primaryColor={primaryColor}
                     secondaryColor={secondaryColor}
+                    textColor={textColor}
                     scale={scale}
                   />
                 </div>

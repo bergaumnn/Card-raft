@@ -5,11 +5,20 @@ interface MinimalTemplateProps {
   data: BusinessCardData;
   primaryColor: string;
   secondaryColor: string;
+  textColor?: string;
 }
 
-export function MinimalTemplate({ data, primaryColor, secondaryColor }: MinimalTemplateProps) {
+export function MinimalTemplate({
+  data,
+  primaryColor,
+  secondaryColor,
+  textColor = "#000000",
+}: MinimalTemplateProps) {
   return (
-    <div className="w-[800px] h-[450px] bg-white rounded-md overflow-hidden shadow-lg relative">
+    <div
+      className="w-[800px] h-[450px] rounded-md overflow-hidden shadow-lg relative"
+      style={{ backgroundColor: secondaryColor }}
+    >
       <div className="h-full flex flex-col justify-between p-12">
         <div className="flex items-start justify-between">
           <div>
@@ -19,10 +28,18 @@ export function MinimalTemplate({ data, primaryColor, secondaryColor }: MinimalT
             >
               {data.firstName} {data.lastName}
             </h1>
-            <div className="h-px w-16 my-3" style={{ backgroundColor: primaryColor }} />
-            <p className="text-lg text-gray-600 font-light">{data.profession}</p>
+            <div
+              className="h-px w-16 my-3"
+              style={{ backgroundColor: primaryColor }}
+            />
+            <p
+              className="text-lg font-light"
+              style={{ color: textColor }}
+            >
+              {data.profession}
+            </p>
           </div>
-          
+
           {data.avatar && (
             <img
               src={data.avatar}
@@ -36,26 +53,58 @@ export function MinimalTemplate({ data, primaryColor, secondaryColor }: MinimalT
         <div className="space-y-2">
           {data.phone && (
             <div className="flex items-start gap-3">
-              <Phone className="w-4 h-4 mt-0.5" style={{ color: primaryColor }} />
-              <span className="text-sm text-gray-600 font-light leading-tight">{data.phone}</span>
+              <Phone
+                className="w-4 h-4 mt-0.5"
+                style={{ color: primaryColor }}
+              />
+              <span
+                className="text-sm font-light leading-tight"
+                style={{ color: textColor }}
+              >
+                {data.phone}
+              </span>
             </div>
           )}
           {data.email && (
             <div className="flex items-start gap-3">
-              <Mail className="w-4 h-4 mt-0.5" style={{ color: primaryColor }} />
-              <span className="text-sm text-gray-600 font-light leading-tight">{data.email}</span>
+              <Mail
+                className="w-4 h-4 mt-0.5"
+                style={{ color: primaryColor }}
+              />
+              <span
+                className="text-sm font-light leading-tight"
+                style={{ color: textColor }}
+              >
+                {data.email}
+              </span>
             </div>
           )}
           {data.website && (
             <div className="flex items-start gap-3">
-              <Globe className="w-4 h-4 mt-0.5" style={{ color: primaryColor }} />
-              <span className="text-sm text-gray-600 font-light leading-tight">{data.website}</span>
+              <Globe
+                className="w-4 h-4 mt-0.5"
+                style={{ color: primaryColor }}
+              />
+              <span
+                className="text-sm font-light leading-tight"
+                style={{ color: textColor }}
+              >
+                {data.website}
+              </span>
             </div>
           )}
           {data.address && (
             <div className="flex items-start gap-3">
-              <MapPin className="w-4 h-4 mt-0.5" style={{ color: primaryColor }} />
-              <span className="text-sm text-gray-600 font-light leading-tight">{data.address}</span>
+              <MapPin
+                className="w-4 h-4 mt-0.5"
+                style={{ color: primaryColor }}
+              />
+              <span
+                className="text-sm font-light leading-tight"
+                style={{ color: textColor }}
+              >
+                {data.address}
+              </span>
             </div>
           )}
         </div>
