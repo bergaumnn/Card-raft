@@ -132,6 +132,11 @@ input[type="color"]::-moz-color-swatch {
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading; /* Заголовки - з акцентного шрифту */
   }
+
+  /* Приглушені placeholder тексти */
+  ::placeholder {
+    @apply text-muted-foreground/40;
+  }
 }
 
 /* УТИЛІТИ (Tailwind layer utilities) */

@@ -21,7 +21,7 @@
       "firstName": "John",
       "lastName": "Doe",
       "profession": "Web Developer",
-      "phone": "+1 XXX XXX XXXX",
+      "phone": "555 123 4567",
       "email": "example@email.com",
       "website": "www.example.com",
       "address": "New York, USA"

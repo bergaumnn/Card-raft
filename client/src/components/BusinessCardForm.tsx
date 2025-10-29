@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { PhoneInput } from "@/components/PhoneInput";
 import { Upload } from "lucide-react";
 import { useRef } from "react";
 
@@ -135,14 +136,13 @@ export function BusinessCardForm({ onDataChange, initialData }: BusinessCardForm
             <FormItem>
               <FormLabel>{t("form.phone")}</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  placeholder={t("form.placeholders.phone")}
-                  data-testid="input-phone"
-                  onChange={(e) => {
-                    field.onChange(e);
+                <PhoneInput
+                  value={field.value || ""}
+                  onChange={(value) => {
+                    field.onChange(value);
                     handleChange();
                   }}
+                  placeholder={t("form.placeholders.phone")}
                 />
               </FormControl>
               <FormMessage />
