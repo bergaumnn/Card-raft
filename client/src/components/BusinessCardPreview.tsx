@@ -1,3 +1,4 @@
+//Компонент показує попередній перегляд візитки з вибраним шаблоном і кольорами.
 import { BusinessCardData, Template } from "@shared/schema"; // Імпорт типів для даних візитки та шаблонів
 import { ClassicTemplate } from "./templates/ClassicTemplate"; // Імпорт шаблону Classic
 import { CreativeTemplate } from "./templates/CreativeTemplate"; // Імпорт шаблону Creative
